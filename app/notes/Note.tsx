@@ -9,7 +9,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
   const formattedDate = `${published.getDate()}/${published.getMonth()}/${published.getFullYear()}`;
 
   return (
-    <div className="flex w-fit min-w-[300px] flex-col gap-2 rounded-md bg-blue-300 p-5 m-5 text-center">
+    <div className="m-5 flex w-fit min-w-[300px] flex-col gap-2 rounded-md bg-slate-800 p-5 text-center">
       <p className="text-left">{id}</p>
       <h1 className="text-2xl font-medium">{title}</h1>
       <p className="text-lg">{content}</p>

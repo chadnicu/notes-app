@@ -1,28 +1,18 @@
-// import { getNotes } from './api/getNotes/getNotes';
-import { cache } from 'react';
-import Form from './Form';
-import Note from './components/Note';
+import Link from 'next/link';
 import prisma from '@/prisma/client';
-// import { postNote } from './api/notes/postNote';
 
 export default async function Home() {
-  // const data = await getNotes();
   const data = await prisma.note.findMany();
-  fetch(data.toString(), { cache: 'no-store' });
-
-  // console.log(data);
 
   return (
-    <main className="grid place-items-center lg:grid-cols-4">
-      {data.map((note) => (
-        <Note
-          key={note.id}
-          id={note.id}
-          title={note.title}
-          content={note.content ?? ''}
-          published={note.published}
-        />
-      ))}
+    <main className="flex min-h-[60vh] flex-col items-center justify-center gap-5">
+      <h1 className="text-5xl font-bold">Welcome</h1>
+      <Link
+        href="/notes"
+        className="text-5xl font-bold text-purple-400 md:text-slate-200 md:hover:text-purple-400"
+      >
+        Go to /notes
+      </Link>
     </main>
   );
 }
