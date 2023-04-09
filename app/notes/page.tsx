@@ -1,4 +1,4 @@
-import { getNotes } from '../api/postNote/route';
+import { getNotes } from '../api/route';
 import Note from './Note';
 
 export default async function Home() {

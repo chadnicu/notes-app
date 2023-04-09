@@ -25,7 +25,7 @@ export default function Form() {
 
     setActive(false);
 
-    await fetch('/api/postNote', {
+    await fetch('/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
