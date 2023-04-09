@@ -2,9 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-// import PencilSquare from '@/components/PencilSquare';
 import XMark from '@/components/XMark';
-import Image from 'next/image';
 import PencilSquare from '@/components/PencilSquare';
 
 export default function Form() {
@@ -25,7 +23,7 @@ export default function Form() {
   const create = async () => {
     if (title === '') return;
 
-    // setActive(false);
+    setActive(false);
 
     await fetch('/api/postNote', {
       method: 'POST',
