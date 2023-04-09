@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PencilSquare from '@/components/PencilSquare';
+// import PencilSquare from '@/components/PencilSquare';
 import XMark from '@/components/XMark';
+import Image from 'next/image';
+import PencilSquare from '@/components/PencilSquare';
 
 export default function Form() {
   const router = useRouter();
@@ -23,7 +25,7 @@ export default function Form() {
   const create = async () => {
     if (title === '') return;
 
-    setActive(false);
+    // setActive(false);
 
     await fetch('/api/postNote', {
       method: 'POST',
@@ -47,16 +49,16 @@ export default function Form() {
       {!active ? (
         <button
           onClick={() => setActive(!active)}
-          className="h-10 w-10 text-purple-400 md:text-slate-200 md:hover:text-purple-400"
+          className="h-10 w-10 text-slate-200 md:hover:text-purple-400"
         >
           <PencilSquare />
         </button>
       ) : (
         <div className="min-h-[40px] w-full max-w-xs">
-          <form className="mb-4 rounded-md bg-slate-800 px-8 pb-8 pt-6 text-slate-200 md:absolute md:right-12 md:mb-0">
+          <form className="mb-4 rounded-md bg-slate-800 px-8 pb-8 pt-6 text-slate-200 md:absolute md:right-12 md:mb-0 md:shadow-xl md:shadow-slate-900">
             <button
               onClick={() => setActive(!active)}
-              className="float-right md:float-none md:absolute right-4 top-4 h-8 w-8 text-purple-400 md:text-slate-200 md:hover:text-purple-400 "
+              className="right-4 top-4 float-right h-8 w-8 md:absolute md:float-none md:hover:text-purple-400 "
             >
               <XMark />
             </button>
@@ -79,7 +81,7 @@ export default function Form() {
             </div>
             <div className="flex items-center justify-center">
               <button
-                className="font-bold text-purple-400 focus:outline-none md:text-slate-200 md:hover:text-purple-400"
+                className="font-bold focus:outline-none  md:hover:text-purple-400"
                 type="button"
                 onClick={create}
               >

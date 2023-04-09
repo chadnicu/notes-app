@@ -5,7 +5,7 @@ export default async function Home() {
   const data = await prisma.note.findMany();
 
   return (
-    <main className="grid place-items-center lg:grid-cols-4">
+    <main className="grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {data.map((note) => (
         <Note
           key={note.id}

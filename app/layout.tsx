@@ -21,10 +21,10 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="bg-slate-900 text-slate-200">
         <nav className="mb-10 flex items-center justify-around pt-10">
-          <Link href="/" className="text-xl text-purple-400 md:text-slate-200 md:hover:text-purple-400 ">
+          <Link href="/" className="text-xl md:hover:text-purple-400 ">
             Home
           </Link>
-          <Link href="/notes" className="text-xl text-purple-400 md:text-slate-200 md:hover:text-purple-400 ">
+          <Link href="/notes" className="text-xl md:hover:text-purple-400">
             Notes
           </Link>
         </nav>
