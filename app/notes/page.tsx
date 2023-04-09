@@ -1,8 +1,8 @@
-import prisma from '@/prisma/client';
+import { GET } from '../api/postNote/route';
 import Note from './Note';
 
 export default async function Home() {
-  const data = await prisma.note.findMany();
+  const data = await GET();
 
   return (
     <main className="grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
