@@ -1,12 +1,10 @@
 import prisma from '@/prisma/client';
 
-import { cache } from 'react';
-
-export const getNotes = cache(async () => {
+export async function getNotes() {
   const data = await prisma.note.findMany();
 
   return data;
-});
+}
 
 export async function POST(req: Request) {
   const body = await req.json();
