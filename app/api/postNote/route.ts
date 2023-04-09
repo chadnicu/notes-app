@@ -2,7 +2,8 @@ import prisma from '@/prisma/client';
 
 export async function GET() {
   const data = await prisma.note.findMany();
-  return data;
+
+  return new Response(JSON.stringify(data));
 }
 
 export async function POST(req: Request) {
