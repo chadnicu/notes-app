@@ -21,3 +21,7 @@ export async function POST(req: Request) {
     JSON.stringify({ title: body.title, content: body.content })
   );
 }
+
+export async function PUT(req: Request) {
+  
+}

@@ -47,7 +47,7 @@ export default function Form() {
       {!active ? (
         <button
           onClick={() => setActive(!active)}
-          className="h-10 w-10 text-slate-200 md:hover:text-purple-400"
+          className="text-slate-200 md:hover:text-purple-400"
         >
           <PencilSquare />
         </button>
@@ -56,7 +56,7 @@ export default function Form() {
           <form className="mb-4 rounded-md bg-slate-800 px-8 pb-8 pt-6 text-slate-200 md:absolute md:right-12 md:mb-0 md:shadow-xl md:shadow-slate-900">
             <button
               onClick={() => setActive(!active)}
-              className="right-4 top-4 float-right h-8 w-8 md:absolute md:float-none md:hover:text-purple-400 "
+              className="right-4 top-4 float-right md:absolute md:float-none md:hover:text-purple-400 "
             >
               <XMark />
             </button>
