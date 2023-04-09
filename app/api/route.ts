@@ -32,3 +32,15 @@ export async function PUT(req: Request) {
     JSON.stringify({ title: body.title, content: body.content })
   );
 }
+
+export async function DELETE(req: Request) {
+  const body = await req.json();
+
+  await prisma.note.delete({
+    where: {
+      id: body.id,
+    },
+  });
+
+  return new Response(JSON.stringify({ id: body.id }));
+}

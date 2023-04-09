@@ -17,17 +17,16 @@ export default function Note({ id, title, content, published }: NoteProps) {
   const router = useRouter();
 
   const [editable, setEditable] = useState(false);
-  const [toDelete, setToDelete] = useState([false, false]);
 
-  const [newTitle, setNewTitle] = useState(title);
-  const [newContent, setNewContent] = useState(content);
+  let newTitle = useRef(title);
+  let newContent = useRef(content);
 
   function handleTitle(e: any) {
-    setNewTitle(e.currentTarget.textContent);
+    newTitle.current = e.currentTarget.textContent;
   }
 
   function handleContent(e: any) {
-    setNewContent(e.currentTarget.textContent);
+    newContent.current = e.currentTarget.textContent;
   }
 
   async function handleEdit() {
@@ -43,21 +42,27 @@ export default function Note({ id, title, content, published }: NoteProps) {
       },
       body: JSON.stringify({
         id,
-        title: newTitle,
-        content: newContent,
+        title: newTitle.current,
+        content: newContent.current,
       }),
     });
 
     router.refresh();
   }
 
-  function ask() {
-    const arr: boolean[] = toDelete.slice();
-    arr[0] = !arr[0];
-    setToDelete(arr);
-  }
+  async function handleDelete() {
+    await fetch('/api', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    });
 
-  function handleDelete() {}
+    router.refresh();
+  }
 
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-slate-800 p-5 text-center">
@@ -66,13 +71,9 @@ export default function Note({ id, title, content, published }: NoteProps) {
         <button onClick={handleEdit} className="md:hover:text-purple-400">
           {editable ? <Check /> : <Pencil />}
         </button>
-        {toDelete[0] ? (
-          <button onClick={ask} className="md:hover:text-purple-400">
-            <Trash />
-          </button>
-        ) : (
-          <div onClick={handleDelete}>u sure boi?</div>
-        )}
+        <button onClick={handleDelete} className="md:hover:text-purple-400">
+          <Trash />
+        </button>
       </div>
       <h1
         onInput={handleTitle}
