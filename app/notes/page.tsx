@@ -3,8 +3,6 @@ export const dynamic = 'auto';
 import prisma from '@/prisma/client';
 import Note from './Note';
 import PencilSquare from '@/components/PencilSquare';
-import { Suspense } from 'react';
-import Loading from './loading';
 
 export default async function Home() {
   const data = await prisma.note.findMany();
@@ -17,17 +15,15 @@ export default async function Home() {
           to add some
         </p>
       )}
-      <Suspense fallback={<p>asf</p>}>
-        {data.map((note: any) => (
-          <Note
-            key={note.id}
-            id={note.id}
-            title={note.title}
-            content={note.content ?? ''}
-            published={note.published}
-          />
-        ))}
-      </Suspense>
+      {data.map((note: any) => (
+        <Note
+          key={note.id}
+          id={note.id}
+          title={note.title}
+          content={note.content ?? ''}
+          published={note.published}
+        />
+      ))}
     </main>
   );
 }

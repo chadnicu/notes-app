@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <section>
-      <div className="flex items-center justify-center px-12 md:justify-end">
+      <div className="flex items-center px-12 justify-end">
         <Form />
       </div>
       {children}

@@ -5,7 +5,6 @@ import Check from '@/components/Check';
 import Trash from '@/components/Trash';
 import { useRef, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import LoadingSpinner from '@/components/LoadingSpinner';
 
 type NoteProps = {
   id: number;
