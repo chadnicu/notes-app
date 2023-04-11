@@ -44,3 +44,4 @@ export async function DELETE(req: Request) {
 
   return new Response(JSON.stringify({ id: body.id }));
 }
+

@@ -8,9 +8,9 @@ export default async function Home() {
   const data = await prisma.note.findMany();
 
   return (
-    <main className="grid grid-cols-1 place-items-start gap-10 p-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <main className="grid grid-cols-1 place-items-center gap-10 py-10 md:grid-cols-2 md:place-items-start md:p-10 lg:grid-cols-3 xl:grid-cols-4">
       {data.length === 0 && (
-        <p className="absolute inset-0 m-auto flex h-6 w-80 justify-center gap-1 text-center">
+        <p className="inset-0 m-auto flex h-6 w-80 justify-center gap-1 text-center md:absolute">
           There{"'"}s no notes. Click <PencilSquare size={5} />
           to add some
         </p>

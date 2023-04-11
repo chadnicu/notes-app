@@ -3,7 +3,7 @@
 import Pencil from '@/components/Pencil';
 import Check from '@/components/Check';
 import Trash from '@/components/Trash';
-import { useRef, useState, useTransition } from 'react';
+import { use, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 type NoteProps = {
@@ -66,7 +66,6 @@ export default function Note({ id, title, content, published }: NoteProps) {
 
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-zinc-800 p-5 text-center">
-      {/* <p className="text-left">{id}</p> */}
       <div className="flex justify-between">
         <button onClick={handleEdit} className="md:hover:text-purple-400">
           {editable ? <Check /> : <Pencil />}
@@ -79,7 +78,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
         onInput={handleTitle}
         contentEditable={editable}
         className={`text-2xl font-medium ${
-          editable ? 'border border-zinc-500 p-2' : ''
+          editable ? 'border border-zinc-600 p-2' : ''
         }`}
       >
         {title}
@@ -87,7 +86,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
       <p
         onInput={handleContent}
         contentEditable={editable}
-        className={`text-lg ${editable ? 'border border-zinc-500 p-2' : ''}`}
+        className={`text-lg ${editable ? 'border border-zinc-600 p-2' : ''}`}
       >
         {content}
       </p>

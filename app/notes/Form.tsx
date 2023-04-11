@@ -53,7 +53,7 @@ export default function Form() {
         </button>
       ) : (
         <div className="min-h-[40px] w-full max-w-xs">
-          <form className="mb-4 z-10 rounded-md bg-zinc-800 px-8 pb-8 pt-6 text-zinc-300 md:absolute md:right-12 md:mb-0 md:shadow-xl md:shadow-zinc-900">
+          <form className="z-10 mb-4 rounded-md bg-zinc-800 px-8 pb-8 pt-6 text-zinc-300 md:absolute md:right-12 md:mb-0 md:shadow-xl md:shadow-zinc-900">
             <button
               onClick={() => setActive(!active)}
               type="button"
