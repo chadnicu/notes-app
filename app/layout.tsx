@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="bg-slate-900 text-slate-200">
+      <body className="bg-zinc-900 text-zinc-300">
         <nav className="mb-10 flex items-center justify-around pt-10">
           <Link href="/" className="text-xl md:hover:text-purple-400 ">
             Home

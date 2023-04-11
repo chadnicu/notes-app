@@ -47,15 +47,16 @@ export default function Form() {
       {!active ? (
         <button
           onClick={() => setActive(!active)}
-          className="text-slate-200 md:hover:text-purple-400"
+          className="text-zinc-300 md:hover:text-purple-400"
         >
           <PencilSquare />
         </button>
       ) : (
         <div className="min-h-[40px] w-full max-w-xs">
-          <form className="mb-4 rounded-md bg-slate-800 px-8 pb-8 pt-6 text-slate-200 md:absolute md:right-12 md:mb-0 md:shadow-xl md:shadow-slate-900">
+          <form className="mb-4 rounded-md bg-zinc-800 px-8 pb-8 pt-6 text-zinc-300 md:absolute md:right-12 md:mb-0 md:shadow-xl md:shadow-zinc-900">
             <button
               onClick={() => setActive(!active)}
+              type="button"
               className="right-4 top-4 float-right md:absolute md:float-none md:hover:text-purple-400 "
             >
               <XMark />
@@ -80,7 +81,7 @@ export default function Form() {
             <div className="flex items-center justify-center">
               <button
                 className="font-bold focus:outline-none  md:hover:text-purple-400"
-                type="button"
+                type="submit"
                 onClick={create}
               >
                 Post
