@@ -3,8 +3,9 @@
 import Pencil from '@/components/Pencil';
 import Check from '@/components/Check';
 import Trash from '@/components/Trash';
-import { useRef, useState } from 'react';
+import { useRef, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 type NoteProps = {
   id: number;
@@ -17,6 +18,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
   const router = useRouter();
 
   const [editable, setEditable] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   let newTitle = useRef(title);
   let newContent = useRef(content);
@@ -47,7 +49,9 @@ export default function Note({ id, title, content, published }: NoteProps) {
       }),
     });
 
-    router.refresh();
+    startTransition(() => {
+      router.refresh();
+    });
   }
 
   async function handleDelete() {
@@ -72,7 +76,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
           {editable ? <Check /> : <Pencil />}
         </button>
         <button onClick={handleDelete} className="md:hover:text-purple-400">
-          <Trash />
+          {isPending ? <LoadingSpinner /> : <Trash />}
         </button>
       </div>
       <h1

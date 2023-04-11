@@ -1,4 +1,4 @@
-export default function PencilSquare() {
+export default function PencilSquare({ size = 8 }: { size: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export default function PencilSquare() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="h-8 w-8"
+      className={`h-${size} w-${size}`}
     >
       <path
         strokeLinecap="round"
