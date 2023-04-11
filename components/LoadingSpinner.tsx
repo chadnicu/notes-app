@@ -1,9 +1,9 @@
-export default function LoadingSpinner() {
+export default function LoadingSpinner({ size = 8 }: { size?: number }) {
   return (
     <div role="status">
       <svg
         aria-hidden="true"
-        className="mr-2 h-8 w-8 animate-spin fill-zinc-800 text-zinc-300"
+        className={`mr-2 h-${size} w-${size} animate-spin fill-zinc-800 text-zinc-300`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
