@@ -4,13 +4,16 @@ import Pencil from '@/components/Pencil';
 import Check from '@/components/Check';
 import Trash from '@/components/Trash';
 import { use, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import ArrowTopRight from '@/components/ArrowTopRight';
 
 type NoteProps = {
-  id: number;
+  id?: number;
   title: string;
   content: string;
-  published: Date;
+  published?: Date;
 };
 
 export default function Note({ id, title, content, published }: NoteProps) {
@@ -64,9 +67,12 @@ export default function Note({ id, title, content, published }: NoteProps) {
     router.refresh();
   }
 
+  const pathname = usePathname();
+  console.log(pathname, 'lalalal');
+
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-zinc-800 p-5 text-center">
-      <div className="flex justify-between">
+      <div className="flex items-start justify-between">
         <button onClick={handleEdit} className="md:hover:text-purple-400">
           {editable ? <Check /> : <Pencil />}
         </button>
@@ -90,7 +96,16 @@ export default function Note({ id, title, content, published }: NoteProps) {
       >
         {content}
       </p>
-      <p className="text-right text-xs">{published.toString().slice(0, 10)}</p>
+      <div className="flex items-end justify-between">
+        <p className="text-xs">{published?.toString().slice(0, 10)}</p>
+        <Link href={`/note/${id}`} className="md:hover:text-purple-400">
+          {pathname === '/notes' ? (
+            <ArrowTopRight />
+          ) : (
+            <p className="text-xs">id: {id}</p>
+          )}
+        </Link>
+      </div>
     </div>
   );
 }

@@ -3,6 +3,8 @@ export const dynamic = 'auto';
 import prisma from '@/prisma/client';
 import Note from './Note';
 import PencilSquare from '@/components/PencilSquare';
+import Page from '../note/[slug]/page';
+import Link from 'next/link';
 
 export default async function Home() {
   const data = await prisma.note.findMany();
@@ -21,7 +23,7 @@ export default async function Home() {
           id={note.id}
           title={note.title}
           content={note.content ?? ''}
-          published={note.published}
+          // published={note.published}
         />
       ))}
     </main>
