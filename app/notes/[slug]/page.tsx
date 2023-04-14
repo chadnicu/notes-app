@@ -1,5 +1,5 @@
 // not sure
-// export const dynamic = 'auto';
+export const dynamic = 'auto';
 
 import prisma from '@/prisma/client';
 import Note from '../Note';
