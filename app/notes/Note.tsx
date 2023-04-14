@@ -1,5 +1,6 @@
 'use client';
 
+import useSWR from 'swr';
 import Pencil from '@/components/Pencil';
 import Check from '@/components/Check';
 import Trash from '@/components/Trash';
@@ -64,6 +65,10 @@ export default function Note({ id, title, content, published }: NoteProps) {
       }),
     });
 
+    if (pathname !== '/notes') {
+      router.replace('/notes');
+    }
+
     router.refresh();
   }
 
@@ -97,13 +102,13 @@ export default function Note({ id, title, content, published }: NoteProps) {
       </p>
       <div className="flex items-end justify-between">
         <p className="text-xs">{published?.toString().slice(0, 10)}</p>
-        <Link href={`/notes/${id}`} className="md:hover:text-purple-400">
-          {pathname === '/notes' ? (
+        {pathname === '/notes' ? (
+          <Link href={`/notes/${id}`} className="md:hover:text-purple-400">
             <ArrowTopRight />
-          ) : (
-            <p className="text-xs">id: {id}</p>
-          )}
-        </Link>
+          </Link>
+        ) : (
+          <p className="text-xs">id: {id}</p>
+        )}
       </div>
     </div>
   );
