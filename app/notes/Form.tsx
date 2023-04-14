@@ -57,7 +57,7 @@ export default function Form() {
           <PencilSquare />
         </button>
       ) : (
-        <div className="min-h-[40px] w-full max-w-xs">
+        <div className="min-h-[32px] w-full max-w-xs">
           <form className="absolute left-0 right-0 z-10 m-auto w-fit rounded-md bg-zinc-800 p-8 text-zinc-300 shadow-xl shadow-zinc-900 md:left-auto md:right-12 md:m-0">
             <button
               onClick={() => setActive(!active)}
