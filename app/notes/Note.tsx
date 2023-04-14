@@ -68,7 +68,6 @@ export default function Note({ id, title, content, published }: NoteProps) {
   }
 
   const pathname = usePathname();
-  console.log(pathname, 'lalalal');
 
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-zinc-800 p-5 text-center">
@@ -98,7 +97,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
       </p>
       <div className="flex items-end justify-between">
         <p className="text-xs">{published?.toString().slice(0, 10)}</p>
-        <Link href={`/note/${id}`} className="md:hover:text-purple-400">
+        <Link href={`/notes/${id}`} className="md:hover:text-purple-400">
           {pathname === '/notes' ? (
             <ArrowTopRight />
           ) : (

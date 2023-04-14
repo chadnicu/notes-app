@@ -1,11 +1,14 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import XMark from '@/components/XMark';
 import PencilSquare from '@/components/PencilSquare';
 
 export default function Form() {
+  const pathname = usePathname();
+
   const router = useRouter();
 
   const [active, setActive] = useState(false);
@@ -47,7 +50,9 @@ export default function Form() {
       {!active ? (
         <button
           onClick={() => setActive(!active)}
-          className="text-zinc-300 md:hover:text-purple-400"
+          className={`text-zinc-300 md:hover:text-purple-400 ${
+            pathname !== '/notes' ? 'hidden' : ''
+          }`}
         >
           <PencilSquare />
         </button>

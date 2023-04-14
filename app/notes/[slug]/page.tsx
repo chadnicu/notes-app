@@ -1,5 +1,8 @@
+// not sure
+// export const dynamic = 'auto';
+
 import prisma from '@/prisma/client';
-import Note from '../../notes/Note';
+import Note from '../Note';
 import Link from 'next/link';
 import ArrowLeft from '@/components/ArrowLeft';
 
@@ -9,7 +12,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   });
 
   return (
-    <main className="absolute inset-0 m-auto grid h-fit w-fit place-items-center gap-5">
+    <main className="absolute inset-0 m-auto grid h-fit w-fit place-items-center gap-6">
       <Note
         id={data?.id ?? 0}
         title={data?.title ?? ''}

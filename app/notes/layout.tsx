@@ -10,6 +10,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <section>
       <div className="flex items-center px-12 justify-end">
