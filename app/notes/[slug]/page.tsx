@@ -4,10 +4,13 @@ import prisma from '@/prisma/client';
 import Note from '../Note';
 import Link from 'next/link';
 import ArrowLeft from '@/components/ArrowLeft';
+import { auth } from '@clerk/nextjs/app-beta';
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const data = await prisma.note.findUnique({
-    where: { id: parseInt(params.slug) },
+  const { userId } = auth();
+
+  const data = await prisma.note.findFirst({
+    where: { id: parseInt(params.slug), userId: userId },
   });
 
   return (
