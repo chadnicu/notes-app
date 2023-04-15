@@ -15,7 +15,7 @@ export default async function Home() {
   });
 
   return (
-    <main className="grid grid-cols-1 place-items-center gap-10 py-10 md:grid-cols-2 md:place-items-start md:p-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+    <div className="grid grid-cols-1 place-items-center gap-10 py-10 md:grid-cols-2 md:place-items-start md:p-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       {data.length === 0 && (
         <p className="absolute inset-0 m-auto flex h-6 w-80 justify-center gap-1 text-center">
           There{"'"}s no notes. Click <PencilSquare size={5} />
@@ -31,6 +31,6 @@ export default async function Home() {
           // published={note.published}
         />
       ))}
-    </main>
+    </div>
   );
 }

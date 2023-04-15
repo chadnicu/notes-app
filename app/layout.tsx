@@ -3,6 +3,7 @@ export const dynamic = 'auto';
 import Link from 'next/link';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import Image from 'next/image';
 import {
   ClerkProvider,
   SignedIn,
@@ -19,6 +20,9 @@ const inter = Inter({
 export const metadata = {
   title: 'Notes App',
   description: 'App for taking notes',
+  colorScheme: 'dark',
+  creator: 'nicu420',
+  themeColor: 'black',
 };
 
 export default async function RootLayout({
@@ -56,7 +60,18 @@ export default async function RootLayout({
               <UserButton afterSignOutUrl={'/'} />
             </SignedIn>
           </nav>
-          {children}
+          <main>{children}</main>
+          <footer className="my-10 flex w-full justify-center gap-1 text-center ">
+            <p>Powered by</p>
+            <Link href={'https://vercel.com/'} target="_blank">
+              <Image
+                src="/vercel.svg"
+                width={100}
+                height={100}
+                alt="vercel logo"
+              />
+            </Link>
+          </footer>
         </body>
       </ClerkProvider>
     </html>
