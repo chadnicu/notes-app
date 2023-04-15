@@ -61,7 +61,7 @@ export default async function RootLayout({
             </SignedIn>
           </nav>
           <main>{children}</main>
-          <footer className="my-10 flex w-full justify-center gap-1 text-center ">
+          <footer className="fixed bottom-10 flex w-full justify-center gap-1 text-center">
             <p>Powered by</p>
             <Link href={'https://vercel.com/'} target="_blank">
               <Image
