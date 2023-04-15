@@ -1,4 +1,3 @@
-import { currentUser } from '@clerk/nextjs/app-beta';
 import Form from './Form';
 
 export const metadata = {

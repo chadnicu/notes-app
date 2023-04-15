@@ -1,5 +1,3 @@
-'use client';
-
 import { TypingText } from '@/components/TypingText';
 
 export default function Home() {

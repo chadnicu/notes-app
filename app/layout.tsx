@@ -8,7 +8,6 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
-  currentUser,
 } from '@clerk/nextjs/app-beta';
 import { dark } from '@clerk/themes';
 

@@ -1,8 +1,32 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { textContainer, textVariant2 } from '../utils/motion';
 import Link from 'next/link';
+
+const textContainer = {
+  hidden: {
+    opacity: 0,
+  },
+  show: (i = 1) => ({
+    opacity: 1,
+    transition: { staggerChildren: 0.05, delayChildren: i * 0.1 },
+  }),
+};
+
+export const textVariant = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'tween',
+      ease: 'easeIn',
+    },
+  },
+};
 
 export const TypingText = () => (
   <motion.div initial="hidden" whileInView="show">
@@ -12,7 +36,7 @@ export const TypingText = () => (
     >
       {Array.from('Go to /notes').map((letter, index) => (
         <motion.span
-          variants={textVariant2}
+          variants={textVariant}
           key={index}
           className={`${index > 5 ? 'text-purple-400' : 'text-zinc-200'}`}
         >

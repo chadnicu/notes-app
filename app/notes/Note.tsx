@@ -1,10 +1,9 @@
 'use client';
 
-import useSWR from 'swr';
 import Pencil from '@/components/Pencil';
 import Check from '@/components/Check';
 import Trash from '@/components/Trash';
-import { use, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -51,7 +50,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
         id,
         title: newTitle.current,
         content: newContent.current,
-        userId
+        userId,
       }),
     });
 

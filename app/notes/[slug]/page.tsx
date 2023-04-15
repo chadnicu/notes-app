@@ -1,4 +1,3 @@
-// not sure
 export const dynamic = 'auto';
 
 import prisma from '@/prisma/client';
