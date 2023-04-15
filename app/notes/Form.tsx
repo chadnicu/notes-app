@@ -5,8 +5,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import XMark from '@/components/XMark';
 import PencilSquare from '@/components/PencilSquare';
+import { useAuth } from '@clerk/nextjs';
 
 export default function Form() {
+  const { userId } = useAuth();
+
   const pathname = usePathname();
 
   const router = useRouter();
@@ -36,6 +39,7 @@ export default function Form() {
       body: JSON.stringify({
         title,
         content,
+        userId,
       }),
     });
 
@@ -50,7 +54,7 @@ export default function Form() {
       {!active ? (
         <button
           onClick={() => setActive(!active)}
-          className={`text-zinc-300 md:hover:text-purple-400 ${
+          className={`text-zinc-200 md:hover:text-purple-400 ${
             pathname !== '/notes' ? 'hidden' : ''
           }`}
         >
@@ -58,7 +62,7 @@ export default function Form() {
         </button>
       ) : (
         <div className="min-h-[32px] w-full max-w-xs">
-          <form className="absolute left-0 right-0 z-10 m-auto w-fit rounded-md bg-zinc-800 p-8 text-zinc-300 shadow-xl shadow-zinc-900 md:left-auto md:right-12 md:m-0">
+          <form className="absolute left-0 right-0 z-10 m-auto w-fit rounded-md bg-zinc-800 p-8 text-zinc-200 shadow-xl shadow-zinc-900 md:left-auto md:right-12 md:m-0">
             <button
               onClick={() => setActive(!active)}
               type="button"

@@ -15,4 +15,5 @@ model Note {
   title     String
   content   String?
   published DateTime @default(now())
+  userId    String?
 }

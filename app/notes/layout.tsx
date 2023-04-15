@@ -1,3 +1,4 @@
+import { currentUser } from '@clerk/nextjs/app-beta';
 import Form from './Form';
 
 export const metadata = {
@@ -5,15 +6,14 @@ export const metadata = {
   description: 'Your notes',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <section>
-      <div className="flex items-center px-12 justify-end">
+      <div className="flex items-center justify-end px-12">
         <Form />
       </div>
       {children}

@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ArrowTopRight from '@/components/ArrowTopRight';
+import { useAuth } from '@clerk/nextjs';
 
 type NoteProps = {
   id?: number;
@@ -18,6 +19,8 @@ type NoteProps = {
 };
 
 export default function Note({ id, title, content, published }: NoteProps) {
+  const { userId } = useAuth();
+
   const router = useRouter();
 
   const [editable, setEditable] = useState(false);
@@ -48,6 +51,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
         id,
         title: newTitle.current,
         content: newContent.current,
+        userId
       }),
     });
 

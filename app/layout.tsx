@@ -1,6 +1,16 @@
+export const dynamic = 'auto';
+
 import Link from 'next/link';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  currentUser,
+} from '@clerk/nextjs/app-beta';
+import { dark } from '@clerk/themes';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -12,24 +22,44 @@ export const metadata = {
   description: 'App for taking notes',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="bg-zinc-900 text-zinc-300">
-        <nav className="mb-10 flex items-center justify-around pt-10">
-          <Link href="/" className="text-xl md:hover:text-purple-400 ">
-            Home
-          </Link>
-          <Link href="/notes" className="text-xl md:hover:text-purple-400">
-            Notes
-          </Link>
-        </nav>
-        {children}
-      </body>
+      <ClerkProvider
+        appearance={{
+          variables: {
+            colorBackground: '#27272a',
+          },
+          baseTheme: dark,
+        }}
+      >
+        <body className="bg-zinc-900 text-zinc-200">
+          <nav className="mb-10 flex items-center justify-around pt-10">
+            <Link href="/" className="text-lg md:hover:text-purple-400 ">
+              Home
+            </Link>
+            <Link href="/notes" className="text-lg md:hover:text-purple-400">
+              Notes
+            </Link>
+            <SignedOut>
+              <Link
+                href="/sign-in"
+                className="text-lg md:hover:text-purple-400"
+              >
+                Sign in
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl={'/'} />
+            </SignedIn>
+          </nav>
+          {children}
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
