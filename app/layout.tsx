@@ -1,28 +1,29 @@
-export const dynamic = 'auto';
+export const dynamic = "auto";
 
-import Link from 'next/link';
-import './globals.css';
-import { Inter } from 'next/font/google';
-import Image from 'next/image';
+import { Analytics } from "@vercel/analytics/react";
+import Link from "next/link";
+import "./globals.css";
+import { Inter } from "next/font/google";
+import Image from "next/image";
 import {
   ClerkProvider,
   SignedIn,
   SignedOut,
   UserButton,
-} from '@clerk/nextjs/app-beta';
-import { dark } from '@clerk/themes';
+} from "@clerk/nextjs/app-beta";
+import { dark } from "@clerk/themes";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
-  title: 'Notes App',
-  description: 'App for taking notes',
-  colorScheme: 'dark',
-  creator: 'nicu420',
-  themeColor: 'black',
+  title: "Notes App",
+  description: "App for taking notes",
+  colorScheme: "dark",
+  creator: "nicu420",
+  themeColor: "black",
 };
 
 export default async function RootLayout({
@@ -35,7 +36,7 @@ export default async function RootLayout({
       <ClerkProvider
         appearance={{
           variables: {
-            colorBackground: '#27272a',
+            colorBackground: "#27272a",
           },
           baseTheme: dark,
         }}
@@ -57,13 +58,13 @@ export default async function RootLayout({
               </Link>
             </SignedOut>
             <SignedIn>
-              <UserButton afterSignOutUrl={'/'} />
+              <UserButton afterSignOutUrl={"/"} />
             </SignedIn>
           </nav>
           <main>{children}</main>
           <footer className="fixed bottom-10 flex w-full justify-center gap-1 text-center">
             <p>Powered by</p>
-            <Link href={'https://vercel.com/'} target="_blank">
+            <Link href={"https://vercel.com/"} target="_blank">
               <Image
                 src="/vercel.svg"
                 width={100}
@@ -72,6 +73,7 @@ export default async function RootLayout({
               />
             </Link>
           </footer>
+          <Analytics />
         </body>
       </ClerkProvider>
     </html>
