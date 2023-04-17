@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import Pencil from '@/components/Pencil';
-import Check from '@/components/Check';
-import Trash from '@/components/Trash';
-import { useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import ArrowTopRight from '@/components/ArrowTopRight';
-import { useAuth } from '@clerk/nextjs';
+import Pencil from "@/components/Pencil";
+import Check from "@/components/Check";
+import Trash from "@/components/Trash";
+import { useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import ArrowTopRight from "@/components/ArrowTopRight";
+import { useAuth } from "@clerk/nextjs";
 
 type NoteProps = {
   id?: number;
@@ -41,10 +41,10 @@ export default function Note({ id, title, content, published }: NoteProps) {
       return;
     }
 
-    await fetch('/api', {
-      method: 'PUT',
+    await fetch("/api", {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id,
@@ -57,25 +57,25 @@ export default function Note({ id, title, content, published }: NoteProps) {
     router.refresh();
   }
 
+  const pathname = usePathname();
+
   async function handleDelete() {
-    await fetch('/api', {
-      method: 'DELETE',
+    await fetch("/api", {
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id,
       }),
     });
 
-    if (pathname !== '/notes') {
-      router.replace('/notes');
+    if (pathname !== "/notes") {
+      router.replace("/notes");
     }
 
     router.refresh();
   }
-
-  const pathname = usePathname();
 
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-zinc-800 p-5 text-center">
@@ -91,7 +91,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
         onInput={handleTitle}
         contentEditable={editable}
         className={`text-2xl font-medium ${
-          editable ? 'border border-zinc-600 p-2' : ''
+          editable ? "border border-zinc-600 p-2" : ""
         }`}
       >
         {title}
@@ -99,13 +99,13 @@ export default function Note({ id, title, content, published }: NoteProps) {
       <p
         onInput={handleContent}
         contentEditable={editable}
-        className={`text-lg ${editable ? 'border border-zinc-600 p-2' : ''}`}
+        className={`text-lg ${editable ? "border border-zinc-600 p-2" : ""}`}
       >
         {content}
       </p>
       <div className="flex items-end justify-between">
         <p className="text-xs">{published?.toString().slice(0, 10)}</p>
-        {pathname === '/notes' ? (
+        {pathname === "/notes" ? (
           <Link href={`/notes/${id}`} className="md:hover:text-purple-400">
             <ArrowTopRight />
           </Link>

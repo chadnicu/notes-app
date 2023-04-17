@@ -1,10 +1,10 @@
-export const dynamic = 'auto';
+export const dynamic = "auto";
 
-import prisma from '@/prisma/client';
-import Note from '../Note';
-import Link from 'next/link';
-import ArrowLeft from '@/components/ArrowLeft';
-import { auth } from '@clerk/nextjs/app-beta';
+import prisma from "@/prisma/client";
+import Note from "../Note";
+import Link from "next/link";
+import ArrowLeft from "@/components/ArrowLeft";
+import { auth } from "@clerk/nextjs/app-beta";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { userId } = auth();
@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <Note
           id={data.id}
           title={data.title}
-          content={data.content ?? ''}
+          content={data.content ?? ""}
           published={data.published}
         />
       )}
