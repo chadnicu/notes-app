@@ -1,9 +1,10 @@
 export const dynamic = "auto";
 
+import { Inter } from "next/font/google";
+
 import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
 import "./globals.css";
-import { Inter } from "next/font/google";
 import Image from "next/image";
 import {
   ClerkProvider,
@@ -15,7 +16,7 @@ import { dark } from "@clerk/themes";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
+  // display: "swap",
 });
 
 export const metadata = {
@@ -32,7 +33,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en">
       <ClerkProvider
         appearance={{
           variables: {
@@ -41,26 +42,10 @@ export default async function RootLayout({
           baseTheme: dark,
         }}
       >
-        <body className="bg-zinc-900 text-zinc-200">
-          <nav className="mb-10 flex items-center justify-around pt-10">
-            <Link href="/" className="text-lg md:hover:text-purple-400 ">
-              Home
-            </Link>
-            <Link href="/notes" className="text-lg md:hover:text-purple-400">
-              Notes
-            </Link>
-            <SignedOut>
-              <Link
-                href="/sign-in"
-                className="text-lg md:hover:text-purple-400"
-              >
-                Sign in
-              </Link>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl={"/"} />
-            </SignedIn>
-          </nav>
+        <body
+          className={`${inter.className} bg-zinc-900 tracking-tight text-zinc-200`}
+        >
+          <Navbar />
           <main>{children}</main>
           <footer className="fixed bottom-10 flex w-full justify-center gap-1 text-center">
             <p>Powered by</p>
@@ -77,5 +62,35 @@ export default async function RootLayout({
         </body>
       </ClerkProvider>
     </html>
+  );
+}
+
+function Navbar() {
+  return (
+    <nav className="flex items-center justify-around py-10 font-semibold">
+      <Link
+        href="/"
+        className="text-xl duration-200 md:hover:text-purple-400 "
+      >
+        Home
+      </Link>
+      <Link
+        href="/notes"
+        className="text-xl duration-200 md:hover:text-purple-400"
+      >
+        Notes
+      </Link>
+      <SignedOut>
+        <Link
+          href="/sign-in"
+          className="text-xl duration-200 md:hover:text-purple-400"
+        >
+          Sign in
+        </Link>
+      </SignedOut>
+      <SignedIn>
+        <UserButton afterSignOutUrl={"/"} />
+      </SignedIn>
+    </nav>
   );
 }

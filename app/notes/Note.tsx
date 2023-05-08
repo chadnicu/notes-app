@@ -80,10 +80,16 @@ export default function Note({ id, title, content, published }: NoteProps) {
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-zinc-800 p-5 text-center">
       <div className="flex items-start justify-between">
-        <button onClick={handleEdit} className="md:hover:text-purple-400">
+        <button
+          onClick={handleEdit}
+          className="duration-200 md:hover:text-purple-400"
+        >
           {editable ? <Check /> : <Pencil />}
         </button>
-        <button onClick={handleDelete} className="md:hover:text-purple-400">
+        <button
+          onClick={handleDelete}
+          className="duration-200 md:hover:text-purple-400"
+        >
           <Trash />
         </button>
       </div>
@@ -106,7 +112,10 @@ export default function Note({ id, title, content, published }: NoteProps) {
       <div className="flex items-end justify-between">
         <p className="text-xs">{published?.toString().slice(0, 10)}</p>
         {pathname === "/notes" ? (
-          <Link href={`/notes/${id}`} className="md:hover:text-purple-400">
+          <Link
+            href={`/notes/${id}`}
+            className="duration-200 md:hover:text-purple-400"
+          >
             <ArrowTopRight />
           </Link>
         ) : (

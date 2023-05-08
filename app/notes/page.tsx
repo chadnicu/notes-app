@@ -1,9 +1,11 @@
-export const dynamic = 'auto';
+export const dynamic = "auto";
 
-import prisma from '@/prisma/client';
-import Note from './Note';
-import PencilSquare from '@/components/PencilSquare';
-import { auth } from '@clerk/nextjs/app-beta';
+import prisma from "@/prisma/client";
+import Note from "./Note";
+import PencilSquare from "@/components/PencilSquare";
+import { auth } from "@clerk/nextjs/app-beta";
+import { Skeleton } from "@/components/ui/skeleton";
+import NoteSkeleton from "@/components/NoteSkeleton";
 
 export default async function Home() {
   const { userId } = auth();
@@ -27,7 +29,7 @@ export default async function Home() {
           key={note.id}
           id={note.id}
           title={note.title}
-          content={note.content ?? ''}
+          content={note.content ?? ""}
           // published={note.published}
         />
       ))}

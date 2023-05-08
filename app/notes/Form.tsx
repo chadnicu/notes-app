@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import XMark from '@/components/XMark';
-import PencilSquare from '@/components/PencilSquare';
-import { useAuth } from '@clerk/nextjs';
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import XMark from "@/components/XMark";
+import PencilSquare from "@/components/PencilSquare";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Form() {
   const { userId } = useAuth();
@@ -15,8 +15,8 @@ export default function Form() {
   const router = useRouter();
 
   const [active, setActive] = useState(false);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   function handleTitle(e: any) {
     setTitle(e.target.value);
@@ -27,14 +27,14 @@ export default function Form() {
   }
 
   const create = async () => {
-    if (title === '') return;
+    if (title === "") return;
 
     setActive(false);
 
-    await fetch('/api', {
-      method: 'POST',
+    await fetch("/api", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title,
@@ -43,8 +43,8 @@ export default function Form() {
       }),
     });
 
-    setTitle('');
-    setContent('');
+    setTitle("");
+    setContent("");
 
     router.refresh();
   };
@@ -54,8 +54,8 @@ export default function Form() {
       {!active ? (
         <button
           onClick={() => setActive(!active)}
-          className={`text-zinc-200 md:hover:text-purple-400 ${
-            pathname !== '/notes' ? 'hidden' : ''
+          className={`text-zinc-200 duration-200 md:hover:text-purple-400 ${
+            pathname !== "/notes" ? "hidden" : ""
           }`}
         >
           <PencilSquare />
@@ -66,7 +66,7 @@ export default function Form() {
             <button
               onClick={() => setActive(!active)}
               type="button"
-              className="right-4 top-4 float-right md:absolute md:float-none md:hover:text-purple-400 "
+              className="right-4 top-4 float-right duration-200 md:absolute md:float-none md:hover:text-purple-400 "
             >
               <XMark />
             </button>
@@ -89,7 +89,7 @@ export default function Form() {
             </div>
             <div className="flex items-center justify-center">
               <button
-                className="font-bold focus:outline-none  md:hover:text-purple-400"
+                className="font-bold duration-200  focus:outline-none md:hover:text-purple-400"
                 type="submit"
                 onClick={create}
               >
