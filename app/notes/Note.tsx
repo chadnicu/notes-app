@@ -81,7 +81,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
   }
 
   return (
-    <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-zinc-800 p-5 text-center">
+    <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md border-2 p-5 text-center">
       <div className="flex items-start justify-between">
         <EditNoteDialog
           noteId={id ?? 0}

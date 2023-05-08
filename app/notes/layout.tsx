@@ -1,8 +1,9 @@
-import Form from './Form';
+import { FormPopover } from "@/components/FormPopover";
+import Form from "./Form";
 
 export const metadata = {
-  title: 'Your notes',
-  description: 'Your notes',
+  title: "Your notes",
+  description: "Your notes",
 };
 
 export default async function RootLayout({
@@ -13,7 +14,8 @@ export default async function RootLayout({
   return (
     <section>
       <div className="flex items-center justify-end px-12">
-        <Form />
+        {/* <Form /> */}
+        <FormPopover />
       </div>
       {children}
     </section>

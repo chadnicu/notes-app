@@ -38,7 +38,7 @@ export const TypingText = () => (
         <motion.span
           variants={textVariant}
           key={index}
-          className={`${index > 5 ? 'text-purple-400' : 'text-zinc-200'}`}
+          className={`${index > 5 ? 'text-purple-400' : 'text-foreground'}`}
         >
           {letter === ' ' ? (
             '\u00A0'

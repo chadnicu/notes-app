@@ -42,9 +42,7 @@ export default async function RootLayout({
           baseTheme: dark,
         }}
       >
-        <body
-          className={`${inter.className} dark bg-zinc-900 tracking-tight text-zinc-200`}
-        >
+        <body className={`${inter.className} dark tracking-tight`}>
           <Navbar />
           <main>{children}</main>
           <footer className="fixed bottom-10 flex w-full justify-center gap-1 text-center">
