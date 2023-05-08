@@ -43,7 +43,7 @@ export default async function RootLayout({
         }}
       >
         <body
-          className={`${inter.className} bg-zinc-900 tracking-tight text-zinc-200`}
+          className={`${inter.className} dark bg-zinc-900 tracking-tight text-zinc-200`}
         >
           <Navbar />
           <main>{children}</main>
@@ -68,10 +68,7 @@ export default async function RootLayout({
 function Navbar() {
   return (
     <nav className="flex items-center justify-around py-10 font-semibold">
-      <Link
-        href="/"
-        className="text-xl duration-200 md:hover:text-purple-400 "
-      >
+      <Link href="/" className="text-xl duration-200 md:hover:text-purple-400 ">
         Home
       </Link>
       <Link

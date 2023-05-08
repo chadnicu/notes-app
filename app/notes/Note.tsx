@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ArrowTopRight from "@/components/ArrowTopRight";
 import { useAuth } from "@clerk/nextjs";
+import { AlertDialog } from "@radix-ui/react-alert-dialog";
+import { AlertDialogDelete } from "@/components/AlertDialog";
+import { EditNoteDialog } from "@/components/EditNoteDialog";
 
 type NoteProps = {
   id?: number;
@@ -80,18 +83,19 @@ export default function Note({ id, title, content, published }: NoteProps) {
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md bg-zinc-800 p-5 text-center">
       <div className="flex items-start justify-between">
-        <button
+        <EditNoteDialog
+          noteId={id ?? 0}
+          title={newTitle.current}
+          content={newContent.current}
+          userId={userId ?? ""}
+        />
+        {/* <button
           onClick={handleEdit}
           className="duration-200 md:hover:text-purple-400"
         >
           {editable ? <Check /> : <Pencil />}
-        </button>
-        <button
-          onClick={handleDelete}
-          className="duration-200 md:hover:text-purple-400"
-        >
-          <Trash />
-        </button>
+        </button> */}
+        <AlertDialogDelete noteId={id ?? 0} />
       </div>
       <h1
         onInput={handleTitle}
