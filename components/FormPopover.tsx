@@ -9,19 +9,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
-import { MutableRefObject, Ref, useRef } from "react";
-import { addNote } from "@/lib/actions";
-import { useAuth } from "@clerk/nextjs";
 import PencilSquare from "./PencilSquare";
 
-export default function FormPopover({
-  addNote,
-}: {
-  // addNote: (title: string,content: string, userId:string) => void;
-  addNote: any;
-}) {
-  const formRef = useRef();
-
+export default function FormPopover({ addNote }: { addNote: any }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -31,19 +21,7 @@ export default function FormPopover({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="container mr-2 md:mr-12">
-        <form
-          action={addNote}
-          //   action={async (formData) => {
-          //     const [title, content] = [
-          //       formData.get("title"),
-          //       formData.get("content"),
-          //     ];
-          //     console.log(title, content);
-          //     // formRef.current?.reset(); // Property 'reset' does not exist on type 'never'.
-          //     await addNote(title?.toString() ?? "", content?.toString(), userId);
-          //   }}
-          // ref={formRef}
-        >
+        <form action={addNote}>
           <div className="grid gap-6">
             <div className="space-y-2 ">
               <h4 className="font-medium leading-none">Add a new note</h4>
