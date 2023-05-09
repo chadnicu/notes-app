@@ -16,15 +16,13 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
 
   const { userId } = useAuth();
 
-  const [opened, setOpened] = useState();
-
   async function addTheNote(formData: FormData) {
     const [title, content] = [
       formData.get("title")?.toString(),
       formData.get("content")?.toString(),
     ];
     console.log(title, content);
-    if (title && userId) {
+    if (title && content && userId) {
       addOptimisticNotes({
         title,
         content,
