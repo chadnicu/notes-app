@@ -1,8 +1,5 @@
 "use client";
 
-import Pencil from "@/components/Pencil";
-import Check from "@/components/Check";
-import Trash from "@/components/Trash";
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
