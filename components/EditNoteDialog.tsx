@@ -26,22 +26,23 @@ export function EditNoteDialog({
   content: string;
   userId: string;
 }) {
-  const [opened, setOpened] = useState(false); // have to click edit icon twice after saving the note
-  console.log(opened);
+  // const [opened, setOpened] = useState(false); // have to click edit icon twice after saving the note
+  // console.log(opened);
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <button
           className="duration-200 md:hover:text-purple-400"
-          onClick={() => {
-            setOpened(true);
-          }}
+          // onClick={() => {
+          //   setOpened(true);
+          // }}
         >
           <Pencil />
         </button>
       </DialogTrigger>
-      {opened && (
+      {/* {opened && ( */}
+      {true && (
         <DialogContent className="sm:max-w-[425px]">
           <form
             action={async (formData) => {
@@ -49,7 +50,7 @@ export function EditNoteDialog({
                 formData.get("title"),
                 formData.get("content"),
               ];
-              setOpened(false);
+              // setOpened(false);
               if (
                 newTitle?.toString() !== title ||
                 newContent?.toString() !== content

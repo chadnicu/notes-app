@@ -11,6 +11,7 @@ import {
   UserButton,
 } from "@clerk/nextjs/app-beta";
 import { dark } from "@clerk/themes";
+import { TypingText } from "@/components/TypingText";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,10 +41,34 @@ export default function RootLayout({
           baseTheme: dark,
         }}
       >
-        <body className={`${inter.className} dark tracking-tight`}>
-          <Navbar />
+        <body className={`${inter.className} dark min-h-screen tracking-tight`}>
+          <nav className="flex items-center justify-around py-10 font-semibold">
+            <Link
+              href="/"
+              className="text-xl duration-200 md:hover:text-purple-400 "
+            >
+              Home
+            </Link>
+            <Link
+              href="/notes"
+              className="text-xl duration-200 md:hover:text-purple-400"
+            >
+              Notes
+            </Link>
+            <SignedOut>
+              <Link
+                href="/sign-in"
+                className="text-xl duration-200 md:hover:text-purple-400"
+              >
+                Sign in
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl={"/"} />
+            </SignedIn>
+          </nav>
           <main>{children}</main>
-          {/* <footer className="fixed bottom-10 flex w-full justify-center gap-1 text-center">
+          {/* <footer className="absolute bottom-10 flex w-full justify-center gap-1 text-center">
             <p>Powered by</p>
             <Link href={"https://vercel.com/"} target="_blank">
               <Image
@@ -58,32 +83,5 @@ export default function RootLayout({
         </body>
       </ClerkProvider>
     </html>
-  );
-}
-
-function Navbar() {
-  return (
-    <nav className="flex items-center justify-around py-10 font-semibold">
-      <Link href="/" className="text-xl duration-200 md:hover:text-purple-400 ">
-        Home
-      </Link>
-      <Link
-        href="/notes"
-        className="text-xl duration-200 md:hover:text-purple-400"
-      >
-        Notes
-      </Link>
-      <SignedOut>
-        <Link
-          href="/sign-in"
-          className="text-xl duration-200 md:hover:text-purple-400"
-        >
-          Sign in
-        </Link>
-      </SignedOut>
-      <SignedIn>
-        <UserButton afterSignOutUrl={"/"} />
-      </SignedIn>
-    </nav>
   );
 }
