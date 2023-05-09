@@ -1,5 +1,3 @@
-export const dynamic = "auto";
-
 import { Inter } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -27,7 +25,7 @@ export const metadata = {
   themeColor: "black",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -45,7 +43,7 @@ export default async function RootLayout({
         <body className={`${inter.className} dark tracking-tight`}>
           <Navbar />
           <main>{children}</main>
-          <footer className="fixed bottom-10 flex w-full justify-center gap-1 text-center">
+          {/* <footer className="fixed bottom-10 flex w-full justify-center gap-1 text-center">
             <p>Powered by</p>
             <Link href={"https://vercel.com/"} target="_blank">
               <Image
@@ -55,7 +53,7 @@ export default async function RootLayout({
                 alt="vercel logo"
               />
             </Link>
-          </footer>
+          </footer> */}
           <Analytics />
         </body>
       </ClerkProvider>
