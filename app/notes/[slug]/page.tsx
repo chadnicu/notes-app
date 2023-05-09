@@ -5,7 +5,6 @@ import Note from "../Note";
 import Link from "next/link";
 import ArrowLeft from "@/components/ArrowLeft";
 import { auth } from "@clerk/nextjs/app-beta";
-import { Suspense } from "react";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { userId } = auth();
