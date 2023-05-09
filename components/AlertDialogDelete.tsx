@@ -12,28 +12,11 @@ import {
 import Trash from "./Trash";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { deleteNote } from "@/lib/actions";
 
 export function AlertDialogDelete({ noteId }: { noteId: number }) {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  async function handleDelete() {
-    await fetch("/api", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: noteId,
-      }),
-    });
-
-    if (pathname !== "/notes") {
-      router.replace("/notes");
-    }
-
-    router.refresh();
-  }
+  const [isPending, startTransition] = useTransition();
 
   return (
     <AlertDialog>
@@ -41,7 +24,7 @@ export function AlertDialogDelete({ noteId }: { noteId: number }) {
         <button className="duration-200 md:hover:text-purple-400">
           <Trash />
         </button>
-      </AlertDialogTrigger> 
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -52,7 +35,11 @@ export function AlertDialogDelete({ noteId }: { noteId: number }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
+          <AlertDialogAction
+            onClick={() => startTransition(() => deleteNote(noteId))}
+          >
+            Continue
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

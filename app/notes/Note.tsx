@@ -10,7 +10,7 @@ import Link from "next/link";
 import ArrowTopRight from "@/components/ArrowTopRight";
 import { useAuth } from "@clerk/nextjs";
 import { AlertDialog } from "@radix-ui/react-alert-dialog";
-import { AlertDialogDelete } from "@/components/AlertDialog";
+import { AlertDialogDelete } from "@/components/AlertDialogDelete";
 import { EditNoteDialog } from "@/components/EditNoteDialog";
 
 type NoteProps = {

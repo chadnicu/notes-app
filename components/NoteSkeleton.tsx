@@ -2,7 +2,7 @@ import { Skeleton } from "./ui/skeleton";
 
 export default function NoteSkeleton() {
   return (
-    <div className="flex h-[176px] w-72 flex-col gap-3 rounded-md border p-5 text-center opacity-20">
+    <div className="flex h-[176px] w-72 flex-col gap-3 rounded-md border p-5 text-center opacity-100">
       <div className="flex items-start justify-between">
         <Skeleton className="h-[20px] w-[20px]" />
         <Skeleton className="h-[20px] w-[20px]" />
