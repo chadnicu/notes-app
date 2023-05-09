@@ -11,7 +11,7 @@ import FormPopover from "@/components/FormPopover";
 export default function Notes({ notes }: { notes: NoteType[] }) {
   const [optimisticNotes, addOptimisticNotes] = useOptimistic(
     notes,
-    (state, newNote: NoteType) => [...state, newNote]
+    (state, newNote: any) => [...state, newNote]
   );
 
   const { userId } = useAuth();
@@ -22,13 +22,13 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
       formData.get("content")?.toString(),
     ];
     console.log(title, content);
-    if (title && content && userId) {
+    // if (title && content && userId) {
       addOptimisticNotes({
         title,
         content,
         userId,
       });
-    }
+    // }
     await addNote(title ?? "", content, userId);
   }
 
