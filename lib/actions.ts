@@ -24,7 +24,7 @@ export async function addNote(
       userId,
     },
   });
-  revalidatePath("/notes");  // removed optimistic updates 
+  // revalidatePath("/notes");  // added optimistic updates 
 
   // return new NextResponse(JSON.stringify({ title, content }));
 }
