@@ -2,7 +2,7 @@
 
 import { Note as NoteType } from "@prisma/client";
 import PencilSquare from "@/components/PencilSquare";
-import { experimental_useOptimistic as useOptimistic, useState } from "react";
+import { experimental_useOptimistic as useOptimistic } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { addNote } from "@/lib/actions";
 import Note from "./Note";
@@ -17,20 +17,21 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
   const { userId } = useAuth();
 
   async function addTheNote(formData: FormData) {
-    const [title, content] = [
-      formData.get("title")?.toString(),
-      formData.get("content")?.toString(),
-    ];
-    console.log(title, content);
-    if (title && content != undefined && userId) {
-      addOptimisticNotes({
-        id: optimisticNotes[optimisticNotes.length - 1].id + 1, // improvizat lol
-        title,
-        content,
-        userId,
-      });
+    {
+      const [title, content] = [
+        formData.get("title")?.toString(),
+        formData.get("content")?.toString(),
+      ];
+      console.log(title, content);
+      if (title && content != undefined && userId) {
+        addOptimisticNotes({
+          title,
+          content,
+          userId,
+        });
+      }
+      await addNote(title ?? "", content, userId);
     }
-    await addNote(title ?? "", content, userId);
   }
 
   return (

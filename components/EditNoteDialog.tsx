@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import Pencil from "./Pencil";
 import { Textarea } from "./ui/textarea";
 import { editNote } from "@/lib/actions";
-import { Suspense, useRef, useState } from "react";
+import { useState } from "react";
 
 export function EditNoteDialog({
   noteId,
@@ -28,6 +28,8 @@ export function EditNoteDialog({
 }) {
   // const [opened, setOpened] = useState(false); // have to click edit icon twice after saving the note
   // console.log(opened);
+  const [formTitle, setFormTitle] = useState(title);
+  const [formContent, setFormContent] = useState(content);
 
   return (
     <Dialog>
@@ -55,6 +57,8 @@ export function EditNoteDialog({
                 newTitle?.toString() !== title ||
                 newContent?.toString() !== content
               ) {
+                setFormTitle(newTitle?.toString() ?? title);
+                setFormContent(newContent?.toString() ?? content);
                 await editNote(
                   noteId,
                   newTitle?.toString() ?? "",
@@ -78,7 +82,7 @@ export function EditNoteDialog({
                 <Input
                   id="title"
                   name="title"
-                  defaultValue={title}
+                  defaultValue={formTitle}
                   className="col-span-3"
                 />
               </div>
@@ -89,7 +93,7 @@ export function EditNoteDialog({
                 <Textarea
                   id="content"
                   name="content"
-                  defaultValue={content}
+                  defaultValue={formContent}
                   className="col-span-3"
                 />
               </div>
