@@ -22,8 +22,9 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
       formData.get("content")?.toString(),
     ];
     console.log(title, content);
-    if (title && content && userId) {
+    if (title && content != undefined && userId) {
       addOptimisticNotes({
+        id: optimisticNotes[optimisticNotes.length - 1].id + 1, // improvizat lol
         title,
         content,
         userId,
@@ -45,7 +46,7 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
             to add some
           </p>
         )}
-        {optimisticNotes.map((note: any) => (
+        {optimisticNotes.map((note: NoteType) => (
           <Note
             key={note.id}
             id={note.id}

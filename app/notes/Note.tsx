@@ -10,19 +10,18 @@ import { AlertDialog } from "@radix-ui/react-alert-dialog";
 import { AlertDialogDelete } from "@/components/AlertDialogDelete";
 import { EditNoteDialog } from "@/components/EditNoteDialog";
 
-type NoteProps = {
+export default function Note({
+  id,
+  title,
+  content,
+  published,
+}: {
   id?: number;
   title: string;
   content: string;
   published?: Date;
-};
-
-export default function Note({ id, title, content, published }: NoteProps) {
+}) {
   const { userId } = useAuth();
-
-  const router = useRouter();
-
-  const [editable, setEditable] = useState(false);
 
   let newTitle = useRef(title);
   let newContent = useRef(content);
@@ -35,47 +34,7 @@ export default function Note({ id, title, content, published }: NoteProps) {
     newContent.current = e.currentTarget.textContent;
   }
 
-  async function handleEdit() {
-    setEditable(!editable);
-    if (!editable) {
-      return;
-    }
-
-    await fetch("/api", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id,
-        title: newTitle.current,
-        content: newContent.current,
-        userId,
-      }),
-    });
-
-    router.refresh();
-  }
-
   const pathname = usePathname();
-
-  async function handleDelete() {
-    await fetch("/api", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id,
-      }),
-    });
-
-    if (pathname !== "/notes") {
-      router.replace("/notes");
-    }
-
-    router.refresh();
-  }
 
   return (
     <div className="flex h-fit w-72 flex-col gap-3 break-words rounded-md border-2 p-5 text-center">
@@ -86,30 +45,10 @@ export default function Note({ id, title, content, published }: NoteProps) {
           content={newContent.current}
           userId={userId ?? ""}
         />
-        {/* <button
-          onClick={handleEdit}
-          className="duration-200 md:hover:text-purple-400"
-        >
-          {editable ? <Check /> : <Pencil />}
-        </button> */}
         <AlertDialogDelete noteId={id ?? 0} />
       </div>
-      <h1
-        onInput={handleTitle}
-        contentEditable={editable}
-        className={`text-2xl font-medium ${
-          editable ? "border border-zinc-600 p-2" : ""
-        }`}
-      >
-        {title}
-      </h1>
-      <p
-        onInput={handleContent}
-        contentEditable={editable}
-        className={`text-lg ${editable ? "border border-zinc-600 p-2" : ""}`}
-      >
-        {content}
-      </p>
+      <h1 className="text-2xl font-medium">{title}</h1>
+      <p className="text-lg">{content}</p>
       <div className="flex items-end justify-between">
         <p className="text-xs">{published?.toString().slice(0, 10)}</p>
         {pathname === "/notes" ? (
