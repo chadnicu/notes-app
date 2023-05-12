@@ -2,13 +2,19 @@
 
 import { Note as NoteType } from "@prisma/client";
 import PencilSquare from "@/components/PencilSquare";
-import { experimental_useOptimistic as useOptimistic } from "react";
+import {
+  experimental_useOptimistic as useOptimistic,
+  useTransition,
+} from "react";
 import { useAuth } from "@clerk/nextjs";
 import { addNote } from "@/lib/actions";
 import Note from "./Note";
 import FormPopover from "@/components/FormPopover";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function Notes({ notes }: { notes: NoteType[] }) {
+  const [isPending, startTransition] = useTransition();
+
   const [optimisticNotes, addOptimisticNotes] = useOptimistic(
     notes,
     (state, newNote: any) => [...state, newNote]
@@ -30,13 +36,21 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
           userId,
         });
       }
-      await addNote(title ?? "", content, userId);
+      startTransition(async () => await addNote(title ?? "", content, userId));
     }
   }
 
   return (
     <div>
-      <div className="flex justify-end px-12">
+      <div className="flex justify-between px-12">
+        <div
+          className={`flex items-center justify-center gap-3 ${
+            isPending ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <p>Uploading..</p>
+          <LoadingSpinner size={5} />
+        </div>
         <FormPopover addNote={addTheNote} />
       </div>
 

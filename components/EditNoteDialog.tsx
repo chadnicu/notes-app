@@ -13,8 +13,9 @@ import { Label } from "@/components/ui/label";
 import Pencil from "./Pencil";
 import { Textarea } from "./ui/textarea";
 import { editNote } from "@/lib/actions";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
+import LoadingSpinner from "./LoadingSpinner";
 
 export function EditNoteDialog({
   noteId,
@@ -27,6 +28,7 @@ export function EditNoteDialog({
   content: string;
   userId: string;
 }) {
+  const [isPending, startTransition] = useTransition();
   // const [opened, setOpened] = useState(false); // have to click edit icon twice after saving the note
   // console.log(opened);
   const [formTitle, setFormTitle] = useState(title);
@@ -60,10 +62,13 @@ export function EditNoteDialog({
               ) {
                 setFormTitle(newTitle?.toString() ?? title);
                 setFormContent(newContent?.toString() ?? content);
-                await editNote(
-                  noteId,
-                  newTitle?.toString() ?? "",
-                  newContent?.toString()
+                startTransition(
+                  async () =>
+                    await editNote(
+                      noteId,
+                      newTitle?.toString() ?? "",
+                      newContent?.toString()
+                    )
                 );
               }
             }}
@@ -99,9 +104,19 @@ export function EditNoteDialog({
                 />
               </div>
             </div>
-            <DialogFooter>
-              <Button type="submit">Save changes</Button>
-            </DialogFooter>
+            {/* <DialogFooter> */}
+              <div className="flex justify-between">
+                <div
+                  className={`flex items-center justify-center gap-3 -mb-7 ${
+                    isPending ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  <p>Saving..</p>
+                  <LoadingSpinner size={5} />
+                </div>
+                <Button type="submit">Save changes</Button>
+              </div>
+            {/* </DialogFooter> */}
           </form>
         </DialogContent>
       )}
