@@ -1,4 +1,4 @@
-export const dynamic = "auto";
+export const dynamic = "force-dynamic"; //huh 
 
 import prisma from "@/prisma/client";
 import { auth } from "@clerk/nextjs";

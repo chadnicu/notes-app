@@ -42,16 +42,19 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
 
   return (
     <div>
-      <div className="flex justify-between px-12">
-        <div
-          className={`flex items-center justify-center gap-3 ${
-            isPending ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <p>Uploading..</p>
-          <LoadingSpinner size={5} />
-        </div>
+      <div className="relative flex justify-end px-12">
         <FormPopover addNote={addTheNote} />
+        <div className="absolute inset-0 m-auto h-fit w-fit">
+          {isPending && (
+            <div className="flex h-fit w-fit items-center justify-center gap-2">
+              <LoadingSpinner size={5} />
+              <p>Syncing..</p>
+            </div>
+            // ) : (
+            // <p className="text-sm font-semibold">Everything up to date</p>
+            //
+          )}
+        </div>
       </div>
 
       <div className="mb-16 grid grid-cols-1 place-items-center gap-10 py-10 md:grid-cols-2 md:place-items-start md:p-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">

@@ -1,4 +1,4 @@
-export const dynamic = "auto";
+export const dynamic = "force-dynamic";
 
 import prisma from "@/prisma/client";
 import Note from "../Note";

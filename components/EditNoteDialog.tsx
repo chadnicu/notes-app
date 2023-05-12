@@ -107,12 +107,12 @@ export function EditNoteDialog({
             {/* <DialogFooter> */}
               <div className="flex justify-between">
                 <div
-                  className={`flex items-center justify-center gap-3 -mb-7 ${
+                  className={`flex items-center justify-center gap-2 -mb-6 ${
                     isPending ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <p>Saving..</p>
                   <LoadingSpinner size={5} />
+                  <p>Saving..</p>
                 </div>
                 <Button type="submit">Save changes</Button>
               </div>

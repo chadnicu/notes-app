@@ -24,7 +24,8 @@ export async function addNote(
       userId,
     },
   });
-  revalidatePath("/notes");  // added optimistic updates 
+  revalidatePath("/notes");
+  // added optimistic updates
 
   // return new NextResponse(JSON.stringify({ title, content }));
 }
@@ -47,6 +48,7 @@ export async function editNote(
     },
   });
   revalidatePath("/notes");
+  revalidatePath(`/notes/${noteId}`); // nvm
 
   // return new NextResponse(JSON.stringify({ title, content }));
 }
