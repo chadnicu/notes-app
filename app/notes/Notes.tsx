@@ -22,7 +22,7 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
         formData.get("title")?.toString(),
         formData.get("content")?.toString(),
       ];
-      console.log(title, content);
+      // console.log(title, content);
       if (title && content != undefined && userId) {
         addOptimisticNotes({
           title,

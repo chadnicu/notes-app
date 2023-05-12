@@ -14,6 +14,7 @@ import Pencil from "./Pencil";
 import { Textarea } from "./ui/textarea";
 import { editNote } from "@/lib/actions";
 import { useState } from "react";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 export function EditNoteDialog({
   noteId,

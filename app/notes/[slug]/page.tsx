@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
       <main className="absolute inset-0 m-auto grid h-fit w-fit place-items-center gap-6">
         {data === null ? (
-          <p className="text-xl">Unauthorized</p>
+          <p className="text-xl">404</p>
         ) : (
           <Note
             id={data.id}

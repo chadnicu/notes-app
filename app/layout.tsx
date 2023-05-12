@@ -36,7 +36,7 @@ export default function RootLayout({
       <ClerkProvider
         appearance={{
           variables: {
-            colorBackground: "#27272a",
+            colorBackground: "#1D283A",
           },
           baseTheme: dark,
         }}
@@ -45,7 +45,7 @@ export default function RootLayout({
           <nav className="flex items-center justify-around py-10 font-semibold">
             <Link
               href="/"
-              className="text-xl duration-200 md:hover:text-purple-400 "
+              className="text-xl duration-200 md:hover:text-purple-400"
             >
               Home
             </Link>
