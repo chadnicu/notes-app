@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
 import "./globals.css";
-import Image from "next/image";
 import {
   ClerkProvider,
   SignedIn,
@@ -11,7 +10,7 @@ import {
   UserButton,
 } from "@clerk/nextjs/app-beta";
 import { dark } from "@clerk/themes";
-import { TypingText } from "@/components/TypingText";
+import Providers from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -67,7 +66,7 @@ export default function RootLayout({
               <UserButton afterSignOutUrl={"/"} />
             </SignedIn>
           </nav>
-          <main>{children}</main>
+          <Providers>{children}</Providers>
           {/* <footer className="absolute bottom-10 flex w-full justify-center gap-1 text-center">
             <p>Powered by</p>
             <Link href={"https://vercel.com/"} target="_blank">

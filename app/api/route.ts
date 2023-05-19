@@ -1,4 +1,6 @@
-import prisma from '@/prisma/client';
+import prisma from "@/prisma/client";
+import { auth } from "@clerk/nextjs";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -11,7 +13,7 @@ export async function POST(req: Request) {
     },
   });
 
-  return new Response(
+  return new NextResponse(
     JSON.stringify({ title: body.title, content: body.content })
   );
 }
@@ -29,21 +31,33 @@ export async function PUT(req: Request) {
     },
   });
 
-  return new Response(
+  return new NextResponse(
     JSON.stringify({ title: body.title, content: body.content })
   );
 }
 
 export async function DELETE(req: Request) {
   const body = await req.json();
-  
+
   await prisma.note.delete({
     where: {
       id: body.id,
     },
   });
 
-  return new Response(JSON.stringify({ id: body.id }));
+  return new NextResponse(JSON.stringify({ id: body.id }));
+}
+
+export async function GET() {
+  const { userId } = auth();
+
+  const notes = await prisma.note.findMany({
+    where: {
+      userId,
+    },
+  });
+
+  return new NextResponse(JSON.stringify(notes));
 }
 
 // clerk

@@ -13,9 +13,12 @@ import Trash from "./Trash";
 import { useTransition } from "react";
 import { deleteNote } from "@/lib/actions";
 import LoadingSpinner from "./LoadingSpinner";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function AlertDialogDelete({ noteId }: { noteId: number }) {
   const [isPending, startTransition] = useTransition();
+
+  const queryClient = useQueryClient();
 
   return (
     <div>
@@ -40,7 +43,14 @@ export function AlertDialogDelete({ noteId }: { noteId: number }) {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => startTransition(() => deleteNote(noteId))}
+              onClick={() =>
+                startTransition(() =>
+                  deleteNote(noteId).then(() => {
+                    queryClient.invalidateQueries(["notes"]);
+                    queryClient.invalidateQueries(["note"]);
+                  })
+                )
+              }
             >
               Continue
             </AlertDialogAction>

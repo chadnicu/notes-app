@@ -17,22 +17,25 @@ export async function addNote(
   content: string | undefined,
   userId: string | null | undefined
 ) {
-  await prisma.note.create({
-    data: {
-      title,
-      content,
-      userId,
-    },
-  });
-  revalidatePath("/notes");
+  await prisma.note
+    .create({
+      data: {
+        title,
+        content,
+        userId,
+      },
+    })
+    .then(() => revalidatePath("/notes"));
+
   // added optimistic updates
 
   // return new NextResponse(JSON.stringify({ title, content }));
 }
 
 export async function deleteNote(id: number) {
-  await prisma.note.delete({ where: { id } });
-  revalidatePath("/notes");
+  await prisma.note
+    .delete({ where: { id } })
+    .then(() => revalidatePath("/notes"));
 }
 
 export async function editNote(
@@ -40,15 +43,16 @@ export async function editNote(
   title: string,
   content: string | undefined
 ) {
-  await prisma.note.update({
-    where: { id: noteId },
-    data: {
-      title,
-      content,
-    },
-  });
-  revalidatePath("/notes");
-  revalidatePath(`/notes/${noteId}`); // nvm
+  await prisma.note
+    .update({
+      where: { id: noteId },
+      data: {
+        title,
+        content,
+      },
+    })
+    .then(() => revalidatePath("/notes")); // still bugged
+  // revalidatePath(`/notes/${noteId}`); // nvm
 
   // return new NextResponse(JSON.stringify({ title, content }));
 }

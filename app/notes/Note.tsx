@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import ArrowTopRight from "@/components/ArrowTopRight";
@@ -21,17 +20,6 @@ export default function Note({
 }) {
   const { userId } = useAuth();
 
-  let newTitle = useRef(title);
-  let newContent = useRef(content);
-
-  function handleTitle(e: any) {
-    newTitle.current = e.currentTarget.textContent;
-  }
-
-  function handleContent(e: any) {
-    newContent.current = e.currentTarget.textContent;
-  }
-
   const pathname = usePathname();
 
   return (
@@ -39,8 +27,8 @@ export default function Note({
       <div className="flex items-start justify-between">
         <EditNoteDialog
           noteId={id ?? 0}
-          title={newTitle.current}
-          content={newContent.current}
+          title={title}
+          content={content}
           userId={userId ?? ""}
         />
         <AlertDialogDelete noteId={id ?? 0} />
