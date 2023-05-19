@@ -6,6 +6,7 @@ import { Note as NoteType } from "@prisma/client";
 import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import NoteSkeleton from "@/components/NoteSkeleton";
 
 async function fetchNote(id: number) {
   const { data } = await axios.get(`/api/${id}`);
@@ -19,22 +20,22 @@ export default function ClientPage({
   note: NoteType | null;
   id: number;
 }) {
-  //   const queryClient = useQueryClient();
-
   const { data, isError, isLoading } = useQuery({
     queryKey: ["note"],
     queryFn: async () => fetchNote(id),
     initialData: note,
   });
 
-  //   queryClient.invalidateQueries(["note"]);
-
   return (
     <main className="absolute inset-0 m-auto grid h-fit w-fit place-items-center gap-6">
-      {!isLoading && !isError && (
+      {isLoading ? (
+        <NoteSkeleton />
+      ) : isError ? (
+        <p className="text-center">Something went wrong</p>
+      ) : (
         <div>
           {data === null ? (
-            <p className="text-xl">404</p>
+            <p className="text-center text-2xl font-bold">404 note not found</p>
           ) : (
             <Note
               id={data.id}

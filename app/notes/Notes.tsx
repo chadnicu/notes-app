@@ -74,7 +74,7 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
       <div className="relative flex justify-end px-12">
         <FormPopover addNote={addTheNote} />
         <div className="absolute inset-0 m-auto h-fit w-fit">
-          {isPending && (
+          {(isPending || isLoading) && (
             <div className="flex h-fit w-fit items-center justify-center gap-2">
               <LoadingSpinner size={5} />
               <p>Syncing..</p>
@@ -83,23 +83,29 @@ export default function Notes({ notes }: { notes: NoteType[] }) {
         </div>
       </div>
 
-      <div className="mb-16 grid grid-cols-1 place-items-center gap-10 py-10 md:grid-cols-2 md:place-items-start md:p-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {data.length === 0 && (
-          <p className="absolute inset-0 m-auto flex h-6 w-80 justify-center gap-1 text-center">
-            There{"'"}s no notes. Click <PencilSquare size={5} />
-            to add some
-          </p>
-        )}
-        {data?.map((note: NoteType) => (
-          <Note
-            key={note.id}
-            id={note.id}
-            title={note.title}
-            content={note.content ?? ""}
-            // published={note.published}
-          />
-        ))}
-      </div>
+      {isError ? (
+        <p className="absolute inset-0 m-auto flex h-6 w-fit justify-center text-center">
+          Something went wrong
+        </p>
+      ) : (
+        <div className="mb-16 grid grid-cols-1 place-items-center gap-10 py-10 md:grid-cols-2 md:place-items-start md:p-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {data.length === 0 && (
+            <p className="absolute inset-0 m-auto flex h-6 w-80 justify-center gap-1 text-center">
+              There{"'"}s no notes. Click <PencilSquare size={5} />
+              to add some
+            </p>
+          )}
+          {data?.map((note: NoteType) => (
+            <Note
+              key={note.id}
+              id={note.id}
+              title={note.title}
+              content={note.content ?? ""}
+              // published={note.published}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
