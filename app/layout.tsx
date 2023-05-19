@@ -34,9 +34,9 @@ export default function RootLayout({
     <html lang="en">
       <ClerkProvider
         appearance={{
-          variables: {
-            colorBackground: "#1D283A",
-          },
+          // variables: {
+          //   // colorBackground: "#1D283A",
+          // },
           baseTheme: dark,
         }}
       >
