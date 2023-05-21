@@ -1,35 +1,29 @@
 "use client";
 
-import Note from "../Note";
+import Note from "../../../components/Note";
 import ArrowLeft from "@/components/ArrowLeft";
 import { Note as NoteType } from "@prisma/client";
 import axios from "axios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import NoteSkeleton from "@/components/NoteSkeleton";
+import Loading from "./loading";
 
-async function fetchNote(id: number) {
+async function getNote(id: number) {
   const { data } = await axios.get(`/api/${id}`);
   return data;
 }
 
-export default function ClientPage({
-  note,
-  id,
-}: {
-  note: NoteType | null;
-  id: number;
-}) {
+export default function SingleNote({ note }: { note: NoteType }) {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["note"],
-    queryFn: async () => fetchNote(id),
+    queryFn: async () => getNote(note.id),
     initialData: note,
   });
 
   return (
     <main className="absolute inset-0 m-auto grid h-fit w-fit place-items-center gap-6">
       {isLoading ? (
-        <NoteSkeleton />
+        <Loading />
       ) : isError ? (
         <p className="text-center">Something went wrong</p>
       ) : (
@@ -56,5 +50,3 @@ export default function ClientPage({
     </main>
   );
 }
-
-// termina asta

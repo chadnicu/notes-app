@@ -36,7 +36,11 @@ export default function Note({
       <h1 className="text-2xl font-medium">{title}</h1>
       <p className="text-lg">{content}</p>
       <div className="flex items-end justify-between">
-        <p className="text-xs">{published?.toString().slice(0, 10)}</p>
+        <p className="text-xs">
+          {published !== undefined
+            ? JSON.stringify(published).slice(1, 11)
+            : ""}
+        </p>
         {pathname === "/notes" ? (
           <Link
             href={`/notes/${id}`}

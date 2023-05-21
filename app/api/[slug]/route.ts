@@ -11,7 +11,7 @@ export async function GET(
 ) {
   const id = parseInt(params.slug);
 
-  const note = await prisma.note.findFirst({
+  const note = await prisma.note.findUnique({
     where: {
       id,
     },

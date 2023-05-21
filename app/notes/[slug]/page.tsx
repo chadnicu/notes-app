@@ -1,17 +1,14 @@
 export const dynamic = "auto";
-// export const fetchCache = "force-no-store";
-// export const revalidate = 0;
 
 import prisma from "@/prisma/client";
-import { auth } from "@clerk/nextjs/app-beta";
-import ClientPage from "./ClientPage";
+import SingleNote from "./SingleNote";
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const { userId } = auth();
+  const id = parseInt(params.slug);
 
-  const note = await prisma.note.findFirst({
-    where: { id: parseInt(params.slug), userId },
+  const note = await prisma.note.findUnique({
+    where: { id },
   });
 
-  return <ClientPage id={parseInt(params.slug)} note={note} />;
+  return <>{note !== null && <SingleNote note={note} />}</>;
 }

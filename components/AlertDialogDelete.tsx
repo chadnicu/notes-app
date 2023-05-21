@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import Trash from "./Trash";
 import { useTransition } from "react";
-import { deleteNote } from "@/lib/actions";
 import LoadingSpinner from "./LoadingSpinner";
 import { useQueryClient } from "@tanstack/react-query";
+import { deleteNote } from "@/app/api/actions";
 
 export function AlertDialogDelete({ noteId }: { noteId: number }) {
   const [isPending, startTransition] = useTransition();

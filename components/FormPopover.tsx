@@ -10,8 +10,33 @@ import {
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 import PencilSquare from "./PencilSquare";
+import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@clerk/nextjs";
+import { useTransition } from "react";
+import { addNote } from "@/app/api/actions";
+import LoadingSpinner from "./LoadingSpinner";
 
-export default function FormPopover({ addNote }: { addNote: any }) {
+export default function FormPopover() {
+  const queryClient = useQueryClient();
+  const { userId } = useAuth();
+  const [isPending, startTransition] = useTransition();
+
+  async function submit(formData: FormData) {
+    {
+      const [title, content] = [
+        formData.get("title")?.toString(),
+        formData.get("content")?.toString(),
+      ];
+      startTransition(
+        async () =>
+          await addNote(title ?? "", content, userId).then(() => {
+            queryClient.invalidateQueries(["notes"]);
+            queryClient.invalidateQueries(["note"]);
+          })
+      );
+    }
+  }
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -21,7 +46,7 @@ export default function FormPopover({ addNote }: { addNote: any }) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="container mr-2 md:mr-12">
-        <form action={addNote}>
+        <form action={submit}>
           <div className="grid gap-6">
             <div className="space-y-2 ">
               <h4 className="font-medium leading-none">Add a new note</h4>
@@ -49,9 +74,15 @@ export default function FormPopover({ addNote }: { addNote: any }) {
                 />
               </div>
 
-              <Button variant={"outline"} type="submit">
-                Add
-              </Button>
+              {isPending ? (
+                <div className="flex items-center justify-center p-2">
+                  <LoadingSpinner size={6} />
+                </div>
+              ) : (
+                <Button variant={"outline"} type="submit">
+                  Add
+                </Button>
+              )}
             </div>
           </div>
         </form>

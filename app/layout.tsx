@@ -67,17 +67,6 @@ export default function RootLayout({
             </SignedIn>
           </nav>
           <Providers>{children}</Providers>
-          {/* <footer className="absolute bottom-10 flex w-full justify-center gap-1 text-center">
-            <p>Powered by</p>
-            <Link href={"https://vercel.com/"} target="_blank">
-              <Image
-                src="/vercel.svg"
-                width={100}
-                height={100}
-                alt="vercel logo"
-              />
-            </Link>
-          </footer> */}
           <Analytics />
         </body>
       </ClerkProvider>

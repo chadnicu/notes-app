@@ -12,11 +12,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Pencil from "./Pencil";
 import { Textarea } from "./ui/textarea";
-import { editNote } from "@/lib/actions";
 import { useState, useTransition } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
 import LoadingSpinner from "./LoadingSpinner";
 import { useQueryClient } from "@tanstack/react-query";
+import { editNote } from "@/app/api/actions";
 
 export function EditNoteDialog({
   noteId,
