@@ -13,7 +13,7 @@ import PencilSquare from "./PencilSquare";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@clerk/nextjs";
 import { useTransition } from "react";
-import { addNote } from "@/app/api/actions";
+import { addNote } from "@/app/actions";
 import LoadingSpinner from "./LoadingSpinner";
 
 export default function FormPopover() {

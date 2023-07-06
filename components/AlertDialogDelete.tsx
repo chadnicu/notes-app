@@ -13,7 +13,7 @@ import Trash from "./Trash";
 import { useTransition } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteNote } from "@/app/api/actions";
+import { deleteNote } from "@/app/actions";
 
 export function AlertDialogDelete({ noteId }: { noteId: number }) {
   const [isPending, startTransition] = useTransition();
