@@ -16,7 +16,7 @@ import { useState, useTransition } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
 import LoadingSpinner from "./LoadingSpinner";
 import { useQueryClient } from "@tanstack/react-query";
-import { editNote } from "@/app/api/actions";
+import { editNote } from "@/app/actions";
 
 export function EditNoteDialog({
   noteId,
