@@ -5,7 +5,7 @@ import PencilSquare from "@/components/PencilSquare";
 import Note from "../../components/Note";
 import FormPopover from "@/components/FormPopover";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 async function getNotes() {
@@ -14,10 +14,25 @@ async function getNotes() {
 }
 
 export default function Notes({ notes }: { notes: NoteType[] }) {
+  // optimistic updates dont work
+  // const queryClient = useQueryClient();
+
   const { data, isError, isLoading } = useQuery({
     queryKey: ["notes"],
     queryFn: getNotes,
     initialData: notes,
+    // onMutate: async (newNote: NoteType) => {
+    //   await queryClient.cancelQueries({ queryKey: ["notes"] });
+    //   const previousTodos = queryClient.getQueryData(["notes"]);
+    //   queryClient.setQueriesData(["notes"], (old: any) => [...old, newNote]);
+    //   return { previousTodos };
+    // },
+    // onError: (err: any, newTodo: any, context: any) => {
+    //   queryClient.setQueryData(["notes"], context.previousTodos);
+    // },
+    // onSettled: () => {
+    //   queryClient.invalidateQueries({ queryKey: ["notes"] });
+    // },
   });
 
   return (
