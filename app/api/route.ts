@@ -1,10 +1,10 @@
 import prisma from "@/prisma/client";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 // i only have to use get to refetch with react query, others are now unused because of server actions
 export async function GET() {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   const notes = await prisma.note.findMany({
     where: {
