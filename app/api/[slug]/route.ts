@@ -6,10 +6,11 @@ export async function GET(
   {
     params,
   }: {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
   }
 ) {
-  const id = parseInt(params.slug);
+  const { slug } = await params;
+  const id = parseInt(slug);
 
   const note = await prisma.note.findUnique({
     where: {

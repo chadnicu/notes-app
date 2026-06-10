@@ -3,12 +3,7 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
 import "./globals.css";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs/app-beta";
+import { ClerkProvider, Show, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Providers from "./providers";
 
@@ -25,7 +20,7 @@ export const metadata = {
   themeColor: "black",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -33,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider
+        afterSignOutUrl="/"
         appearance={{
           // variables: {
           //   // colorBackground: "#1D283A",
@@ -54,17 +50,17 @@ export default function RootLayout({
             >
               Notes
             </Link>
-            <SignedOut>
+            <Show when="signed-out">
               <Link
                 href="/sign-in"
                 className="text-xl duration-200 md:hover:text-purple-400"
               >
                 Sign in
               </Link>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl={"/"} />
-            </SignedIn>
+            </Show>
+            <Show when="signed-in">
+              <UserButton />
+            </Show>
           </nav>
           <Providers>{children}</Providers>
           <Analytics />
